@@ -1,0 +1,13 @@
+name: simple_dart_web_charts
+description: UI library for drawing charts.
+version: 0.0.1
+repository: https://github.com/ViktorZahar/simple_dart_web_charts
+platforms:
+  web:
+
+environment:
+  sdk: '>=2.16.0 <3.0.0'
+
+dev_dependencies:
+  build_runner: ^2.1.7
+  build_web_compilers:
