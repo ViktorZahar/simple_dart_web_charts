@@ -100,7 +100,7 @@ class Axis {
     var yStepVal = diff / preferStepCount;
     if (yDecimals == null) {
       yDecimals = 0;
-      yStepVal.toString().split('.')[1].split('').forEach((e) {
+      yStepVal.toStringAsFixed(18).split('.')[1].split('').forEach((e) {
         if (e == '0') {
           yDecimals = (yDecimals ?? 0) + 1;
         }

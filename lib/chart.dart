@@ -58,6 +58,15 @@ class Chart {
     axis = Axis(this);
   }
 
+  // This method calls after adding Chart on DOM
+  void init() {
+    if (chartCanvas == null) {
+      createCanvases();
+      container.children.add(chartCanvas!);
+      container.children.add(mouseCanvas!);
+    }
+  }
+
   ChartStyle style = ChartStyle();
   late Element container;
   late Axis axis;
@@ -115,7 +124,7 @@ class Chart {
 
   void renderLineChart(List<LineRow> newData) {
     if (chartCanvas == null) {
-      createCanvases();
+      init();
     }
     var usableData = newData;
     final usableWidth = width - axis.style.leftMargin - axis.style.rightMargin;
@@ -128,14 +137,11 @@ class Chart {
     axis.render(ctx!);
     renderLine(ctx!);
     initMouseEvents(mouseCtx!);
-    container.children.clear();
-    container.children.add(chartCanvas!);
-    container.children.add(mouseCanvas!);
   }
 
   void renderCandleChart(List<CandleRow> newCandleData) {
     if (chartCanvas == null) {
-      createCanvases();
+      init();
     }
     var usableData = newCandleData;
     final usableWidth = width - axis.style.leftMargin - axis.style.rightMargin;
@@ -148,9 +154,6 @@ class Chart {
     axis.render(ctx!);
     renderCandles(ctx!);
     initMouseEvents(mouseCtx!);
-    container.children.clear();
-    container.children.add(chartCanvas!);
-    container.children.add(mouseCanvas!);
   }
 
   void renderLine(CanvasRenderingContext2D ctx) {
