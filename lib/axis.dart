@@ -106,6 +106,9 @@ class Axis {
         }
       });
     }
+    if (yDecimals! > 6) {
+      yDecimals = 0;
+    }
     yDecimals = (yDecimals ?? 0) + 1;
     yFrom = roundDouble(yFrom, yDecimals!);
     yStepVal = roundDouble(yStepVal, yDecimals!);
@@ -128,18 +131,19 @@ class Axis {
     final x = cWidth - style.rightMargin;
     for (var i = 1; i < stepCount; i++) {
       final y = (cHeight - style.bottomMargin) - (i * yStepPix);
-      drawYLabel(ctx, x, y.round(),
-          roundDouble(yFrom + (i * yStepVal), yDecimals! + 2));
+      drawYLabel(ctx, x, y.round(), yFrom + (i * yStepVal), yDecimals!);
     }
   }
 
-  void drawYLabel(CanvasRenderingContext2D ctx, int x, int y, double value) {
+  void drawYLabel(
+      CanvasRenderingContext2D ctx, int x, int y, double value, int decimals) {
+    final roundedValue = roundDouble(value, decimals);
     ctx
       ..beginPath()
       ..moveTo(x, y)
       ..lineTo(x + style.dashLength, y)
       ..stroke();
-    final label = value.toString();
+    final label = roundedValue.toStringAsFixed(decimals);
     ctx.fillText(label, x + style.yLabelIndent, y);
   }
 
