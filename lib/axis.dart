@@ -103,6 +103,7 @@ class Axis {
       yStepVal.toStringAsFixed(18).split('.')[1].split('').forEach((e) {
         if (e == '0') {
           yDecimals = (yDecimals ?? 0) + 1;
+        } else {
           return;
         }
       });
