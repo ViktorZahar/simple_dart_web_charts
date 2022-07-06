@@ -100,13 +100,13 @@ class Axis {
     var yStepVal = diff / preferStepCount;
     if (yDecimals == null) {
       yDecimals = 0;
-      yStepVal.toStringAsFixed(18).split('.')[1].split('').forEach((e) {
-        if (e == '0') {
-          yDecimals = (yDecimals ?? 0) + 1;
-        } else {
-          return;
+      final yStepValSymbols= yStepVal.toStringAsFixed(18).split('.')[1].split('');
+      for (var i = 0; i < yStepValSymbols.length; i++) {
+        if (yStepValSymbols[i] != '0') {
+          yDecimals = i;
+          break;
         }
-      });
+      }
     }
     if (yDecimals! > 6) {
       yDecimals = 0;
